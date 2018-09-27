@@ -103,7 +103,7 @@ const playSound = () => {
 }
 
 const changeSoundVolume = () => {
-  tone[songScore[scoreN]].volume.value = -(1 - app.force) * 10
+  tone[songScore[scoreN]].volume.value = -(1 - app.force) * 20
 }
 
 const changeSoundPitch = (x, y) => {
