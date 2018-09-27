@@ -63,7 +63,6 @@ window.onload = () => {
         app.force = force
         changeSoundVolume()
       }
-      console.log(tone[songScore[scoreN]].volume.value)
     }
   })
 }
