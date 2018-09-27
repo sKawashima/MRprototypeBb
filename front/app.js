@@ -11,6 +11,7 @@ import E4 from './sound/E4.wav'
 
 import Tone from 'tone'
 import isMobile from 'ismobilejs'
+import Pressure from 'pressure'
 
 console.log('hello')
 
@@ -51,11 +52,21 @@ window.onload = () => {
   } else {
     app.c.addEventListener('mousedown', playSound)
     app.c.addEventListener('mouseup', stopSound)
+    app.c.onmousedown =
     console.log('not mobile')
   }
+  // setup Pressure
+  app.force = 0
+  Pressure.set('#app', {
+    change: (force) => {
+      if (force > app.force) {
+        app.force = force
+        changeSoundVolume()
+      }
+      console.log(tone[songScore[scoreN]].volume.value)
+    }
+  })
 }
-
-const mousemove = (ev) => {}
 
 const touchstart = (ev) => {
   user['x'] = ev.touches[ev.touches.length - 1].pageX
@@ -91,12 +102,18 @@ const playSound = () => {
   tone[songScore[scoreN]].restart()
 }
 
+const changeSoundVolume = () => {
+  tone[songScore[scoreN]].volume.value = -(1 - app.force) * 10
+}
+
 const changeSoundPitch = (x, y) => {
   tone[songScore[scoreN]].playbackRate = 1 + x / 2000 + y / 3000
 }
 
 const stopSound = () => {
   tone[songScore[scoreN]].stop()
+  app.force = 0
+  changeSoundVolume()
 }
 
 const nextScore = (scoreN) => {
