@@ -10,14 +10,12 @@ import D4 from './sound/D4.wav'
 import E4 from './sound/E4.wav'
 
 import Tone from 'tone'
-import isMobile from 'ismobilejs'
 import Pressure from 'pressure'
 
 console.log('hello')
 
 const app = []
 const tone = []
-const user = []
 
 // Thousand Dreamsの旋律
 const soundList = ['E3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4']
@@ -44,17 +42,8 @@ window.onload = () => {
   tone['E4'] = new Tone.Player(E4).toMaster()
   console.log(tone)
   // setup methods
-  if (isMobile.any) {
-    app.c.addEventListener('touchstart', touchstart)
-    app.c.addEventListener('touchmove', touchmove)
-    app.c.addEventListener('touchend', touchend)
-    console.log('mobile')
-  } else {
-    app.c.addEventListener('mousedown', playSound)
-    app.c.addEventListener('mouseup', stopSound)
-    app.c.onmousedown =
-    console.log('not mobile')
-  }
+  app.c.addEventListener('mousedown', playSound)
+  app.c.addEventListener('mouseup', stopSound)
   // setup Pressure
   app.force = 0
   Pressure.set('#app', {
@@ -68,25 +57,6 @@ window.onload = () => {
   })
 }
 
-const touchstart = (ev) => {
-  user['x'] = ev.touches[ev.touches.length - 1].pageX
-  user['y'] = ev.touches[ev.touches.length - 1].pageY
-  console.log(user)
-  playSound()
-}
-
-const touchmove = (ev) => {
-  const diffX = Math.abs(user['x'] - ev.touches[ev.touches.length - 1].pageX)
-  const diffY = user['y'] - ev.touches[ev.touches.length - 1].pageY
-  changeSoundPitch(diffX, -diffY)
-}
-
-const touchend = (ev) => {
-  if (ev.touches.length === 0) {
-    stopSound()
-  }
-}
-
 const playSound = () => {
   console.log('play')
   // update scoreN
@@ -98,16 +68,11 @@ const playSound = () => {
     }
   })
   // play sound
-  tone[songScore[scoreN]].playbackRate = 1
   tone[songScore[scoreN]].restart()
 }
 
 const changeSoundVolume = () => {
   tone[songScore[scoreN]].volume.value = -(1 - app.force) * 20
-}
-
-const changeSoundPitch = (x, y) => {
-  tone[songScore[scoreN]].playbackRate = 1 + x / 2000 + y / 3000
 }
 
 const stopSound = () => {

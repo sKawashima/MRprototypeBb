@@ -17,7 +17,6 @@
     "pug": "^2.0.3"
   },
   "dependencies": {
-    "ismobilejs": "^0.4.1",
     "pressure": "^2.1.2",
     "reset-css": "^4.0.1",
     "tone": "^0.12.80"
