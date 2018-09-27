@@ -1,0 +1,6 @@
+{
+  "url-loader": {
+    "exts": ["wav"],
+    "limit": 10000000
+  }
+}

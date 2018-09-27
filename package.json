@@ -1,0 +1,31 @@
+{
+  "name": "MRprototypeBb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.6.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "node-sass": "^4.9.3",
+    "parcel-bundler": "^1.9.7",
+    "parcel-plugin-sw-precache": "^1.0.1",
+    "parcel-plugin-url-loader": "^1.2.5",
+    "pug": "^2.0.3"
+  },
+  "dependencies": {
+    "ismobilejs": "^0.4.1",
+    "reset-css": "^4.0.1",
+    "tone": "^0.12.80"
+  },
+  "scripts": {
+    "dev": "parcel front/index.pug --open",
+    "build": "parcel build front/index.pug --public-url ./ -d docs"
+  },
+  "sw-precache": {
+    "maximumFileSizeToCacheInBytes": 10000000
+  }
+}
